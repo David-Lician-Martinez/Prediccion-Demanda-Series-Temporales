@@ -1,0 +1,16 @@
+beautifulsoup4
+jupyter
+keras
+lightgbm
+matplotlib
+numpy
+pandas
+pdfplumber
+prophet
+PyYAML
+requests
+scikit-learn
+seaborn
+statsmodels
+tensorflow
+xgboost

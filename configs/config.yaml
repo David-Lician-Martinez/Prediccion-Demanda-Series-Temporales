@@ -1,0 +1,52 @@
+project:
+  name: prediccion-demanda-series-temporales
+  display_name: Prediccion de la demanda en servicios de reparto mediante series temporales
+  business_entity: Empresa X
+  coverage:
+    start: 2024-01-01
+    end: 2025-05-25
+  forecast_horizon: 1 week
+  forecast_granularity: 30 minutes
+
+paths:
+  notebooks: notebooks
+  raw_data: data/raw
+  interim_data: data/interim
+  processed_data: data/processed
+  archive_data: data/archive
+  order_reports: data/external/orders_reports
+  weather_parts: data/interim/weather_parts
+  html_reports: reports/html
+  figures: reports/figures
+  docs: docs
+  models: models
+
+workflow:
+  etl:
+    - notebooks/ETL-Orders.ipynb
+    - notebooks/ETL-Holidays.ipynb
+    - notebooks/ETL-Football.ipynb
+    - notebooks/ETL-Euribor.ipynb
+    - notebooks/ETL-Climate.ipynb
+  analysis:
+    - notebooks/TFM-EDA.ipynb
+    - notebooks/TFM-Preprocess-Model-Evaluate.ipynb
+
+outputs:
+  raw:
+    - data/raw/orders.csv
+    - data/raw/all_holidays.csv
+    - data/raw/all_football_competitions.csv
+    - data/raw/euribor.csv
+    - data/raw/weather_hourly.csv
+  processed:
+    - data/processed/df_combined.csv
+    - data/processed/df_weather.csv
+    - data/processed/df_holidays.csv
+    - data/processed/df_football.csv
+    - data/processed/df_major_matches.csv
+
+notes:
+  - The notebooks remain the source of truth for the analytical workflow.
+  - HTML files are visual exports only and are not used for execution.
+  - Some ETL notebooks depend on external APIs and may require valid connectivity, keys, or updated endpoints.
